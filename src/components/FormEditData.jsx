@@ -21,12 +21,12 @@ const FormEditData = () => {
 
   const {id} = useParams();
 
+  const API_URL = import.meta.env.VITE_API_URL;
+
   // Get Data By Id
   const getDataById = async () => {
     try {
-      const response = await axios.get(
-        `http://localhost:3000/mahasiswa/getData/${id}`
-      );
+      const response = await axios.get(`${API_URL}mahasiswa/getData/${id}`);
       console.log(response);
       setNpm(response.data.data.npm);
       setNama(response.data.data.nama);
@@ -45,7 +45,7 @@ const FormEditData = () => {
   const updateData = async (e) => {
     e.preventDefault();
     try {
-      await axios.put(`http://localhost:3000/mahasiswa/editData/${id}`, {
+      await axios.put(`${API_URL}mahasiswa/editData/${id}`, {
         npm,
         nama,
         fakultas,

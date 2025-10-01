@@ -20,10 +20,12 @@ const FormAddData = () => {
 
   const [dataMahasiswa, setDataMahasiswa] = useState([]);
 
+  const API_URL = import.meta.env.VITE_API_URL;
+
   // Get Data
   const getData = async () => {
     try {
-      const {data} = await axios.get("http://localhost:3000/mahasiswa/getData");
+      const {data} = await axios.get(`${API_URL}mahasiswa/getData`);
       console.log(data);
       setDataMahasiswa(data.data);
     } catch (error) {
@@ -46,7 +48,7 @@ const FormAddData = () => {
         }
       });
 
-      await axios.post("http://localhost:3000/mahasiswa/addData", {
+      await axios.post(`${API_URL}mahasiswa/addData`, {
         npm,
         nama,
         fakultas,

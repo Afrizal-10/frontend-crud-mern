@@ -7,10 +7,12 @@ import {confirmDelete, successDeleteAlert} from "../utils/swal";
 function AppCRUD() {
   const [dataMahasiswa, setDataMahasiswa] = useState([]);
 
+  const API_URL = import.meta.env.VITE_API_URL;
+
   // Get Data
   const getData = async () => {
     try {
-      const {data} = await axios.get("http://localhost:3000/mahasiswa/getData");
+      const {data} = await axios.get(`${API_URL}mahasiswa/getData`);
       console.log(data);
       setDataMahasiswa(data.data);
     } catch (error) {
@@ -28,9 +30,7 @@ function AppCRUD() {
     if (!result.isConfirmed) return;
 
     try {
-      const res = await axios.delete(
-        `http://localhost:3000/mahasiswa/deleteData/${id}`
-      );
+      const res = await axios.delete(`${API_URL}mahasiswa/deleteData/${id}`);
       console.log(res.data);
       setDataMahasiswa((prev) => prev.filter((item) => item._id !== id));
       await successDeleteAlert();
@@ -64,7 +64,7 @@ function AppCRUD() {
               {dataMahasiswa.map((data, index) => (
                 <tr key={data._id}>
                   <td className="border px-4 py-2 text-center font-bold">
-                    {index + 1}
+                    {index + 1}.
                   </td>
                   <td className="border px-4 py-2">{data.npm}</td>
                   <td className="border px-4 py-2">{data.nama}</td>
